@@ -1,7 +1,5 @@
 import PropTypes from "prop-types";
-import { format } from "date-fns";
 import {
-  Avatar,
   Box,
   Card,
   Checkbox,
@@ -15,9 +13,8 @@ import {
   Typography,
 } from "@mui/material";
 import { Scrollbar } from "src/components/scrollbar";
-import { getInitials } from "src/utils/get-initials";
 
-export const CustomersTable = (props) => {
+export const DonorsTable = (props) => {
   const {
     count = 0,
     items = [],
@@ -55,44 +52,63 @@ export const CustomersTable = (props) => {
                     }}
                   />
                 </TableCell>
-                <TableCell>Nombre</TableCell>
-                <TableCell>Correo</TableCell>
-                <TableCell>Dirección</TableCell>
-                <TableCell>Teléfono</TableCell>
-                <TableCell>Fecha de la muestra</TableCell>
+                <TableCell>ID</TableCell>
+                <TableCell>Tipo Documento</TableCell>
+                <TableCell>Documento</TableCell>
+                <TableCell>Nombres</TableCell>
+                <TableCell>Apellidos</TableCell>
+                <TableCell>Genero</TableCell>
+                <TableCell>Sirdec</TableCell>
+                <TableCell>Lugar de Nacimiento</TableCell>
+                <TableCell>Lugar toma de cuerpo</TableCell>
+                <TableCell>Muestras</TableCell>
+                <TableCell>Anexo</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {items.map((customer) => {
-                const isSelected = selected.includes(customer.id);
-                const createdAt = format(customer.createdAt, "dd/MM/yyyy");
+              {items.map((resultado) => {
+                const isSelected = selected.includes(resultado.id);
 
                 return (
-                  <TableRow hover key={customer.id} selected={isSelected}>
+                  <TableRow hover key={resultado.id} selected={isSelected}>
                     <TableCell padding="checkbox">
                       <Checkbox
                         checked={isSelected}
                         onChange={(event) => {
                           if (event.target.checked) {
-                            onSelectOne?.(customer.id);
+                            onSelectOne?.(resultado.id);
                           } else {
-                            onDeselectOne?.(customer.id);
+                            onDeselectOne?.(resultado.id);
                           }
                         }}
                       />
                     </TableCell>
                     <TableCell>
                       <Stack alignItems="center" direction="row" spacing={2}>
-                        {/* <Avatar src={customer.avatar}>{getInitials(customer.name)}</Avatar> */}
-                        <Typography variant="subtitle2">{customer.name}</Typography>
+                        <Typography variant="subtitle2">{resultado.id}</Typography>
                       </Stack>
                     </TableCell>
-                    <TableCell>{customer.email}</TableCell>
+                    <TableCell>{resultado.tipoDocumento}</TableCell>
+                    <TableCell>{resultado.documentoIdentidad}</TableCell>
+                    <TableCell>{resultado.nombre}</TableCell>
                     <TableCell>
-                      {customer.address.city}, {customer.address.state}, {customer.address.country}
+                      {resultado.primerApellido}
+                      {resultado.segundoApellido}
                     </TableCell>
-                    <TableCell>{customer.phone}</TableCell>
-                    <TableCell>{createdAt}</TableCell>
+                    <TableCell>{resultado.genero}</TableCell>
+                    <TableCell>{resultado.sirdec}</TableCell>
+
+                    <TableCell>
+                      {resultado.lugarNacimiento.departamento}
+                      {resultado.lugarNacimiento.municipio}
+                    </TableCell>
+                    <TableCell>
+                      {resultado.lugarTomaCuerpo.departamento}
+                      {resultado.lugarTomaCuerpo.municipio}
+                    </TableCell>
+
+                    <TableCell>Ver muestras</TableCell>
+                    <TableCell>{resultado.muestras[0].anexo.perito}</TableCell>
                   </TableRow>
                 );
               })}
@@ -113,7 +129,7 @@ export const CustomersTable = (props) => {
   );
 };
 
-CustomersTable.propTypes = {
+DonorsTable.propTypes = {
   count: PropTypes.number,
   items: PropTypes.array,
   onDeselectAll: PropTypes.func,

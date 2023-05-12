@@ -18,8 +18,35 @@ export const items = [
     ),
   },
   {
-    title: "Búsqueda",
-    path: "/busqueda",
+    title: "Búsqueda de desaparecidos",
+    path: "/busqueda-desaparecidos",
+    icon: (
+      <SvgIcon fontSize="small">
+        <UsersIcon />
+      </SvgIcon>
+    ),
+  },
+  {
+    title: "Agregar desaparecido",
+    path: "/agregar-desaparecido",
+    icon: (
+      <SvgIcon fontSize="small">
+        <UsersIcon />
+      </SvgIcon>
+    ),
+  },
+  {
+    title: "Búsqueda de muestras",
+    path: "/busqueda-muestras",
+    icon: (
+      <SvgIcon fontSize="small">
+        <UsersIcon />
+      </SvgIcon>
+    ),
+  },
+  {
+    title: "Búsqueda de muestradantes",
+    path: "/busqueda-muestradante",
     icon: (
       <SvgIcon fontSize="small">
         <UsersIcon />
