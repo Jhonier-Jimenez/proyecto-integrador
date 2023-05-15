@@ -6,7 +6,7 @@ import { OverviewBudget } from "src/sections/overview/overview-budget";
 import { OverviewLatestOrders } from "src/sections/overview/overview-latest-orders";
 import { OverviewSales } from "src/sections/overview/overview-sales";
 import { OverviewTasksProgress } from "src/sections/overview/overview-tasks-progress";
-import { TotalResults } from "src/sections/overview/overview-total-customers";
+import { TotalResults } from "src/sections/overview/totalResults";
 import { OverviewTotalProfit } from "src/sections/overview/overview-total-profit";
 import { OverviewTraffic } from "src/sections/overview/overview-traffic";
 

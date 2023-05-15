@@ -11,6 +11,7 @@ import {
   TablePagination,
   TableRow,
   Typography,
+  Link,
 } from "@mui/material";
 import { Scrollbar } from "src/components/scrollbar";
 
@@ -54,7 +55,7 @@ export const MissingsTable = (props) => {
                 </TableCell>
                 <TableCell>ID</TableCell>
                 <TableCell>Tipo Documento</TableCell>
-                <TableCell>Documento</TableCell>
+                <TableCell>Número Documento</TableCell>
                 <TableCell>Nombres</TableCell>
                 <TableCell>Apellidos</TableCell>
                 <TableCell>Genero</TableCell>
@@ -108,7 +109,11 @@ export const MissingsTable = (props) => {
                       {resultado.lugarTomaCuerpo?.municipio}
                     </TableCell>
 
-                    <TableCell>Ver muestras</TableCell>
+                    <TableCell>
+                      <Link href={`/busqueda-muestras?desaparecidoID=${resultado.id}`}>
+                        Ver muestras
+                      </Link>
+                    </TableCell>
                   </TableRow>
                 );
               })}

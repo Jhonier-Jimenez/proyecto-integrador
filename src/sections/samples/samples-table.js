@@ -52,16 +52,17 @@ export const SamplesTable = (props) => {
                     }}
                   />
                 </TableCell>
-                <TableCell>ID</TableCell>
-                <TableCell>Tipo Documento</TableCell>
-                <TableCell>Documento</TableCell>
-                <TableCell>Nombres</TableCell>
-                <TableCell>Apellidos</TableCell>
-                <TableCell>Genero</TableCell>
-                <TableCell>Sirdec</TableCell>
-                <TableCell>Lugar de Nacimiento</TableCell>
-                <TableCell>Lugar toma de cuerpo</TableCell>
-                <TableCell>Muestras</TableCell>
+                <TableCell>Muestra ID</TableCell>
+                <TableCell>Muestradante ID</TableCell>
+                <TableCell>Documento Muestradante</TableCell>
+                <TableCell>Nombre Muestradante</TableCell>
+                <TableCell>Tipo de muestra</TableCell>
+                <TableCell>Estado de la muestra</TableCell>
+                <TableCell>Radicado Interno</TableCell>
+                <TableCell>Consentimiento Poblacional</TableCell>
+                <TableCell>Lugar toma de muestra</TableCell>
+                <TableCell>Fecha toma de muestra (Día/Mes/Año)</TableCell>
+                <TableCell>Fecha de llegada al laboratorio (Día/Mes/Año)</TableCell>
                 <TableCell>Anexo</TableCell>
               </TableRow>
             </TableHead>
@@ -85,30 +86,31 @@ export const SamplesTable = (props) => {
                     </TableCell>
                     <TableCell>
                       <Stack alignItems="center" direction="row" spacing={2}>
-                        <Typography variant="subtitle2">{resultado.id}</Typography>
+                        <Typography variant="subtitle2">{resultado.muestraId}</Typography>
                       </Stack>
                     </TableCell>
-                    <TableCell>{resultado.tipoDocumento}</TableCell>
-                    <TableCell>{resultado.documentoIdentidad}</TableCell>
-                    <TableCell>{resultado.nombre}</TableCell>
+                    <TableCell>{resultado.muestra.muestradanteId}</TableCell>
+                    <TableCell>Pendiente:AGREGAR DOCUMENTO Muestradante</TableCell>
+                    <TableCell>Pendiente:AGREGAR NOMBRE Muestradante</TableCell>
+                    <TableCell>{resultado.muestra.tipoMuestra}</TableCell>
+                    <TableCell>{resultado.muestra.estadoMuestra}</TableCell>
+                    <TableCell>{resultado.muestra.radicadoInterno}</TableCell>
+                    <TableCell>{`${resultado.muestra.consentimientoPoblacional}`}</TableCell>
                     <TableCell>
-                      {resultado.primerApellido}
-                      {resultado.segundoApellido}
-                    </TableCell>
-                    <TableCell>{resultado.genero}</TableCell>
-                    <TableCell>{resultado.sirdec}</TableCell>
-
-                    <TableCell>
-                      {resultado.lugarNacimiento.departamento}
-                      {resultado.lugarNacimiento.municipio}
+                      {resultado.muestra.lugarTomaMuestra.municipio}-
+                      {resultado.muestra.lugarTomaMuestra.departamento}
                     </TableCell>
                     <TableCell>
-                      {resultado.lugarTomaCuerpo.departamento}
-                      {resultado.lugarTomaCuerpo.municipio}
+                      {resultado.muestra.fechaTomaMuestra.day}-
+                      {resultado.muestra.fechaTomaMuestra.month}-
+                      {resultado.muestra.fechaTomaMuestra.year}
                     </TableCell>
-
-                    <TableCell>Ver muestras</TableCell>
-                    <TableCell>{resultado.muestras[0].anexo.perito}</TableCell>
+                    <TableCell>
+                      {resultado.muestra.fechaLlegadaLaboratorio.day}-
+                      {resultado.muestra.fechaLlegadaLaboratorio.month}-
+                      {resultado.muestra.fechaLlegadaLaboratorio.year}
+                    </TableCell>
+                    <TableCell></TableCell>
                   </TableRow>
                 );
               })}

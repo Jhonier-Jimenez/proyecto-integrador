@@ -16,9 +16,6 @@ import { MissingsTable } from "src/sections/missings/missings-table";
 import { MissingsSearch } from "src/sections/missings/missings-search";
 import { applyPagination } from "src/utils/apply-pagination";
 import { TotalResults } from "src/sections/overview/totalResults";
-import { OverviewBudget } from "src/sections/overview/overview-budget";
-import { OverviewTasksProgress } from "src/sections/overview/overview-tasks-progress";
-import { OverviewTotalProfit } from "src/sections/overview/overview-total-profit";
 
 // const searchResult = [
 //   {
@@ -109,8 +106,7 @@ const Page = () => {
 
   const handleSearch = async (searchData) => {
     const url = "http://localhost:80/api/desaparecido/filter";
-    console.log(url);
-    console.log(searchData);
+
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -120,7 +116,6 @@ const Page = () => {
     });
 
     const result = await response.json();
-    console.log(result);
     setSearchResult(result);
   };
 
@@ -144,6 +139,18 @@ const Page = () => {
 
             <MissingsSearch onSearch={handleSearch} />
             {searchResult.length > 0 && (
+              <Grid container justifyContent="center" spacing={3}>
+                <Grid xs={12} sm={6} lg={3}>
+                  <TotalResults
+                    difference={16}
+                    positive={false}
+                    sx={{ height: "100%" }}
+                    value={searchResult.length.toString()}
+                  />
+                </Grid>
+              </Grid>
+            )}
+            {searchResult.length > 0 && (
               <MissingsTable
                 count={searchResult.length}
                 items={searchResult}
@@ -157,19 +164,6 @@ const Page = () => {
                 rowsPerPage={rowsPerPage}
                 selected={customersSelection.selected}
               />
-            )}
-
-            {searchResult.length > 0 && (
-              <Grid container spacing={3}>
-                <Grid xs={12} sm={6} lg={3}>
-                  <TotalResults
-                    difference={16}
-                    positive={false}
-                    sx={{ height: "100%" }}
-                    value={searchResult.length}
-                  />
-                </Grid>
-              </Grid>
             )}
 
             {searchResult.length > 0 && (

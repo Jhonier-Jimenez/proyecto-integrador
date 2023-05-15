@@ -12,13 +12,7 @@ import {
 } from "@mui/material";
 import { useCallback } from "react";
 
-export const MissingsSearch = ({ onInputChange, onSearch }) => {
-  const handleKeyDown = (event) => {
-    if (event.keyCode === 13) {
-      handleSubmit();
-    }
-  };
-
+export const MissingsSearch = ({ onSearch }) => {
   const handleSubmit = useCallback((event) => {
     event.preventDefault();
     const searchData = formatSearchData(
@@ -52,7 +46,6 @@ export const MissingsSearch = ({ onInputChange, onSearch }) => {
             fullWidth
             placeholder="Nombres"
             name="nombres"
-            onKeyDown={handleKeyDown}
             sx={{ maxWidth: 400, mr: 3 }}
             required
           />
@@ -60,7 +53,6 @@ export const MissingsSearch = ({ onInputChange, onSearch }) => {
             fullWidth
             placeholder="Primer Apellido"
             name="primerApellido"
-            onKeyDown={handleKeyDown}
             sx={{ maxWidth: 400, mr: 3 }}
           />
 
@@ -68,7 +60,6 @@ export const MissingsSearch = ({ onInputChange, onSearch }) => {
             fullWidth
             placeholder="Segundo Apellido"
             name="segundoApellido"
-            onKeyDown={handleKeyDown}
             sx={{ maxWidth: 400 }}
           />
         </CardContent>
