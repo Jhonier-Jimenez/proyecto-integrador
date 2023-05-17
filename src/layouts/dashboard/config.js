@@ -1,13 +1,13 @@
 import ChartBarIcon from "@heroicons/react/24/solid/ChartBarIcon";
-import CogIcon from "@heroicons/react/24/solid/CogIcon";
 import LockClosedIcon from "@heroicons/react/24/solid/LockClosedIcon";
 import UserIcon from "@heroicons/react/24/solid/UserIcon";
 import UserPlusIcon from "@heroicons/react/24/solid/UserPlusIcon";
 import UsersIcon from "@heroicons/react/24/solid/UsersIcon";
 import XCircleIcon from "@heroicons/react/24/solid/XCircleIcon";
+import MagnifyingGlassCircleIcon from "@heroicons/react/24/solid/MagnifyingGlassCircleIcon";
 import { SvgIcon } from "@mui/material";
 
-export const items = [
+export const mainItems = [
   {
     title: "Página Principal",
     path: "/",
@@ -17,42 +17,7 @@ export const items = [
       </SvgIcon>
     ),
   },
-  {
-    title: "Búsqueda de desaparecidos",
-    path: "/busqueda-desaparecidos",
-    icon: (
-      <SvgIcon fontSize="small">
-        <UsersIcon />
-      </SvgIcon>
-    ),
-  },
-  {
-    title: "Agregar desaparecido",
-    path: "/agregar-desaparecido",
-    icon: (
-      <SvgIcon fontSize="small">
-        <UsersIcon />
-      </SvgIcon>
-    ),
-  },
-  {
-    title: "Búsqueda de muestras",
-    path: "/busqueda-muestras",
-    icon: (
-      <SvgIcon fontSize="small">
-        <UsersIcon />
-      </SvgIcon>
-    ),
-  },
-  {
-    title: "Búsqueda de muestradantes",
-    path: "/busqueda-muestradante",
-    icon: (
-      <SvgIcon fontSize="small">
-        <UsersIcon />
-      </SvgIcon>
-    ),
-  },
+
   {
     title: "Tu cuenta",
     path: "/account",
@@ -86,6 +51,40 @@ export const items = [
     icon: (
       <SvgIcon fontSize="small">
         <XCircleIcon />
+      </SvgIcon>
+    ),
+  },
+];
+
+export const searchitems = [
+  {
+    title: "Búsqueda de desaparecidos",
+    path: "/busqueda-desaparecidos",
+    icon: (
+      <SvgIcon fontSize="small">
+        <MagnifyingGlassCircleIcon />
+      </SvgIcon>
+    ),
+  },
+
+  {
+    title: "Búsqueda de muestradantes",
+    path: "/busqueda-muestradante",
+    icon: (
+      <SvgIcon fontSize="small">
+        <MagnifyingGlassCircleIcon />
+      </SvgIcon>
+    ),
+  },
+];
+
+export const newRegisterItems = [
+  {
+    title: "Agregar desaparecido",
+    path: "/agregar-desaparecido",
+    icon: (
+      <SvgIcon fontSize="small">
+        <UsersIcon />
       </SvgIcon>
     ),
   },

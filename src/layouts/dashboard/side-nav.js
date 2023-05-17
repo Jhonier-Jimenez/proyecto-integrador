@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { Logo } from "src/components/logo";
 import { Scrollbar } from "src/components/scrollbar";
-import { items } from "./config";
+import { mainItems, searchitems, newRegisterItems } from "./config";
 import { SideNavItem } from "./side-nav-item";
 
 export const SideNav = (props) => {
@@ -97,7 +97,59 @@ export const SideNav = (props) => {
               m: 0,
             }}
           >
-            {items.map((item) => {
+            {mainItems.map((item) => {
+              const active = item.path ? pathname === item.path : false;
+
+              return (
+                <SideNavItem
+                  active={active}
+                  disabled={item.disabled}
+                  external={item.external}
+                  icon={item.icon}
+                  key={item.title}
+                  path={item.path}
+                  title={item.title}
+                />
+              );
+            })}
+          </Stack>
+          <Divider sx={{ borderColor: "neutral.700" }} />
+          <Stack
+            component="ul"
+            spacing={0.5}
+            sx={{
+              listStyle: "none",
+              p: 0,
+              mt: 2,
+            }}
+          >
+            {searchitems.map((item) => {
+              const active = item.path ? pathname === item.path : false;
+
+              return (
+                <SideNavItem
+                  active={active}
+                  disabled={item.disabled}
+                  external={item.external}
+                  icon={item.icon}
+                  key={item.title}
+                  path={item.path}
+                  title={item.title}
+                />
+              );
+            })}
+          </Stack>
+          <Divider sx={{ borderColor: "neutral.700" }} />
+          <Stack
+            component="ul"
+            spacing={0.5}
+            sx={{
+              listStyle: "none",
+              p: 0,
+              mt: 2,
+            }}
+          >
+            {newRegisterItems.map((item) => {
               const active = item.path ? pathname === item.path : false;
 
               return (

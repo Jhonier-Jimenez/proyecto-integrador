@@ -11,6 +11,7 @@ import {
   TablePagination,
   TableRow,
   Typography,
+  Link,
 } from "@mui/material";
 import { Scrollbar } from "src/components/scrollbar";
 
@@ -52,21 +53,23 @@ export const DonorsTable = (props) => {
                     }}
                   />
                 </TableCell>
+                <TableCell>#</TableCell>
                 <TableCell>ID</TableCell>
                 <TableCell>Tipo Documento</TableCell>
-                <TableCell>Documento</TableCell>
+                <TableCell>Número Documento</TableCell>
                 <TableCell>Nombres</TableCell>
                 <TableCell>Apellidos</TableCell>
                 <TableCell>Genero</TableCell>
-                <TableCell>Sirdec</TableCell>
                 <TableCell>Lugar de Nacimiento</TableCell>
-                <TableCell>Lugar toma de cuerpo</TableCell>
-                <TableCell>Muestras</TableCell>
-                <TableCell>Anexo</TableCell>
+                <TableCell>Fecha de Nacimiento</TableCell>
+                <TableCell>Muestra</TableCell>
+                <TableCell>Parentesco</TableCell>
+                <TableCell>Dirección</TableCell>
+                <TableCell>Teléfono</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {items.map((resultado) => {
+              {items.map((resultado, index) => {
                 const isSelected = selected.includes(resultado.id);
 
                 return (
@@ -83,6 +86,7 @@ export const DonorsTable = (props) => {
                         }}
                       />
                     </TableCell>
+                    <TableCell>{index}</TableCell>
                     <TableCell>
                       <Stack alignItems="center" direction="row" spacing={2}>
                         <Typography variant="subtitle2">{resultado.id}</Typography>
@@ -92,23 +96,23 @@ export const DonorsTable = (props) => {
                     <TableCell>{resultado.documentoIdentidad}</TableCell>
                     <TableCell>{resultado.nombre}</TableCell>
                     <TableCell>
-                      {resultado.primerApellido}
+                      {`${resultado.primerApellido} `}
                       {resultado.segundoApellido}
                     </TableCell>
-                    <TableCell>{resultado.genero}</TableCell>
-                    <TableCell>{resultado.sirdec}</TableCell>
-
+                    <TableCell>PENDIENTE: AGREGAR GÉNERO</TableCell>
                     <TableCell>
-                      {resultado.lugarNacimiento.departamento}
-                      {resultado.lugarNacimiento.municipio}
+                      {resultado.lugarNacimiento?.departamento}
+                      {resultado.lugarNacimiento?.municipio}
                     </TableCell>
+                    <TableCell>{resultado.fechaNacimiento}</TableCell>
                     <TableCell>
-                      {resultado.lugarTomaCuerpo.departamento}
-                      {resultado.lugarTomaCuerpo.municipio}
+                      <Link href={`/muestra-muestradante?muestradanteID=${resultado.id}`}>
+                        Ver detalle
+                      </Link>
                     </TableCell>
-
-                    <TableCell>Ver muestras</TableCell>
-                    <TableCell>{resultado.muestras[0].anexo.perito}</TableCell>
+                    <TableCell>{resultado.parentesco}</TableCell>
+                    <TableCell>{resultado.direccion}</TableCell>
+                    <TableCell>{resultado.telefono}</TableCell>
                   </TableRow>
                 );
               })}

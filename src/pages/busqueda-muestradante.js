@@ -1,7 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
 import Head from "next/head";
 import ArrowDownOnSquareIcon from "@heroicons/react/24/solid/ArrowDownOnSquareIcon";
-import PlusIcon from "@heroicons/react/24/solid/PlusIcon";
 import {
   Box,
   Button,
@@ -16,72 +15,13 @@ import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
 import { DonorsTable } from "src/sections/donors/donors-table";
 import { DonorsSearch } from "src/sections/donors/donors-search";
 import { applyPagination } from "src/utils/apply-pagination";
-import { OverviewBudget } from "src/sections/overview/overview-budget";
-import { OverviewTasksProgress } from "src/sections/overview/overview-tasks-progress";
 import { TotalResults } from "src/sections/overview/totalResults";
-import { OverviewTotalProfit } from "src/sections/overview/overview-total-profit";
 
-const now = new Date();
-
-const data = [
-  {
-    id: "1",
-    nombre: "nombre 1",
-    documentoIdentidad: "documentoIdentidad 1",
-    tipoDocumento: "tipoDocumento 1",
-    primerApellido: "primerApellido 1",
-    segundoApellido: "segundoApellido 1",
-    genero: "genero 1",
-    sirdec: "sirdec 1",
-    lugarNacimiento: {
-      departamento: "departamento 1",
-      municipio: "municipio 1",
-    },
-    lugarTomaCuerpo: {
-      departamento: "departamento 1",
-      municipio: "municipio 1",
-    },
-    muestras: [
-      {
-        id: "1",
-        tipoMuestra: "tipo 1",
-        lugarTomaMuestra: {
-          departamento: "departamento 1",
-          municipio: "municipio 1",
-        },
-        estadoMuestra: "estado 1",
-        fechaTomaMuestra: "2023-04-01",
-        fechaLlegadaLaboratorio: "2023-05-01",
-        consentimientoPoblacional: true,
-        muestradante: {
-          id: "1",
-          documentoIdentidad: "documentoIdentidad 1",
-          nombre: "nombre 1",
-          primerApellido: "primerApellido 1",
-          segundoApellido: "segundoApellido 1",
-          parentesco: "parentesco 1",
-          fechaNacimiento: "1987-11-21",
-          lugarNacimiento: {
-            departamento: "departamento 1",
-            municipio: "municipio 1",
-          },
-          direccion: "direccion 1",
-          tipoDocumento: "tipoDocumento 1",
-        },
-        anexo: {
-          ot: "ot 1",
-          perito: "perito 1",
-          observaciones: "observaciones 1",
-          uriDocumentacion: "enlace",
-        },
-      },
-    ],
-  },
-];
+const searchResult = [];
 
 const useCustomers = (page, rowsPerPage) => {
   return useMemo(() => {
-    return applyPagination(data, page, rowsPerPage);
+    return applyPagination(searchResult, page, rowsPerPage);
   }, [page, rowsPerPage]);
 };
 
@@ -98,6 +38,8 @@ const Page = () => {
   const customersIds = useCustomerIds(customers);
   const customersSelection = useSelection(customersIds);
 
+  const [searchResult, setSearchResult] = useState([]);
+
   const handlePageChange = useCallback((event, value) => {
     setPage(value);
   }, []);
@@ -105,6 +47,21 @@ const Page = () => {
   const handleRowsPerPageChange = useCallback((event) => {
     setRowsPerPage(event.target.value);
   }, []);
+
+  const handleSearch = async (searchData) => {
+    const url = "http://localhost:80/api/Muestradante/filter";
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(searchData),
+    });
+
+    const result = await response.json();
+    setSearchResult(result);
+  };
 
   return (
     <>
@@ -121,69 +78,52 @@ const Page = () => {
         <Container maxWidth="xl">
           <Stack spacing={3}>
             <Stack direction="row" justifyContent="space-between" spacing={4}>
-              <Stack spacing={1}>
-                <Typography variant="h4">Registro de muestradantes</Typography>
-              </Stack>
-              <div>
+              <Typography variant="h4">Búsqueda de muestradantes</Typography>
+            </Stack>
+
+            <DonorsSearch onSearch={handleSearch} />
+            {searchResult.length > 0 && (
+              <Grid container justifyContent="center" spacing={3}>
+                <Grid xs={12} sm={6} lg={3}>
+                  <TotalResults
+                    difference={16}
+                    positive={false}
+                    sx={{ height: "100%" }}
+                    value={searchResult.length.toString()}
+                  />
+                </Grid>
+              </Grid>
+            )}
+            {searchResult.length > 0 && (
+              <DonorsTable
+                count={searchResult.length}
+                items={searchResult}
+                onDeselectAll={customersSelection.handleDeselectAll}
+                onDeselectOne={customersSelection.handleDeselectOne}
+                onPageChange={handlePageChange}
+                onRowsPerPageChange={handleRowsPerPageChange}
+                onSelectAll={customersSelection.handleSelectAll}
+                onSelectOne={customersSelection.handleSelectOne}
+                page={page}
+                rowsPerPage={rowsPerPage}
+                selected={customersSelection.selected}
+              />
+            )}
+
+            {searchResult.length > 0 && (
+              <Stack alignItems="center" justifyContent="center" direction="row" spacing={1}>
                 <Button
+                  color="inherit"
                   startIcon={
                     <SvgIcon fontSize="small">
-                      <PlusIcon />
+                      <ArrowDownOnSquareIcon />
                     </SvgIcon>
                   }
-                  variant="contained"
                 >
-                  Agregar
+                  Exportar
                 </Button>
-              </div>
-            </Stack>
-            <DonorsSearch />
-            <DonorsTable
-              count={data.length}
-              items={customers}
-              onDeselectAll={customersSelection.handleDeselectAll}
-              onDeselectOne={customersSelection.handleDeselectOne}
-              onPageChange={handlePageChange}
-              onRowsPerPageChange={handleRowsPerPageChange}
-              onSelectAll={customersSelection.handleSelectAll}
-              onSelectOne={customersSelection.handleSelectOne}
-              page={page}
-              rowsPerPage={rowsPerPage}
-              selected={customersSelection.selected}
-            />
-
-            <Grid container spacing={3}>
-              <Grid xs={12} sm={6} lg={3}>
-                <OverviewBudget difference={12} positive sx={{ height: "100%" }} value="$24k" />
-              </Grid>
-              <Grid xs={12} sm={6} lg={3}>
-                <TotalResults
-                  difference={16}
-                  positive={false}
-                  sx={{ height: "100%" }}
-                  value="1.6k"
-                />
-              </Grid>
-
-              <Grid xs={12} sm={6} lg={3}>
-                <OverviewTasksProgress sx={{ height: "100%" }} value={75.5} />
-              </Grid>
-              <Grid xs={12} sm={6} lg={3}>
-                <OverviewTotalProfit sx={{ height: "100%" }} value="$15k" />
-              </Grid>
-            </Grid>
-            <Stack alignItems="center" justifyContent="center" direction="row" spacing={1}>
-              <Button
-                color="inherit"
-                startIcon={
-                  <SvgIcon fontSize="small">
-                    <ArrowDownOnSquareIcon />
-                  </SvgIcon>
-                }
-              >
-                Exportar
-              </Button>
-            </Stack>
+              </Stack>
+            )}
           </Stack>
         </Container>
       </Box>

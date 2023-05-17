@@ -53,6 +53,7 @@ export const MissingsTable = (props) => {
                     }}
                   />
                 </TableCell>
+                <TableCell>#</TableCell>
                 <TableCell>ID</TableCell>
                 <TableCell>Tipo Documento</TableCell>
                 <TableCell>Número Documento</TableCell>
@@ -67,8 +68,7 @@ export const MissingsTable = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {items.map((resultado) => {
-                console.log("TABLE " + resultado);
+              {items.map((resultado, index) => {
                 const isSelected = selected.includes(resultado.id);
 
                 return (
@@ -85,6 +85,7 @@ export const MissingsTable = (props) => {
                         }}
                       />
                     </TableCell>
+                    <TableCell>{index}</TableCell>
                     <TableCell>
                       <Stack alignItems="center" direction="row" spacing={2}>
                         <Typography variant="subtitle2">{resultado.id}</Typography>
@@ -110,10 +111,11 @@ export const MissingsTable = (props) => {
                     </TableCell>
 
                     <TableCell>
-                      <Link href={`/busqueda-muestras?desaparecidoID=${resultado.id}`}>
+                      <Link href={`/muestras-desaparecido?desaparecidoID=${resultado.id}`}>
                         Ver muestras
                       </Link>
                     </TableCell>
+                    <TableCell></TableCell>
                   </TableRow>
                 );
               })}

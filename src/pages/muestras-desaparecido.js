@@ -16,69 +16,10 @@ import {
 } from "@mui/material";
 import { useSelection } from "src/hooks/use-selection";
 import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
-import { SamplesTable } from "src/sections/samples/samples-table";
-import { SamplesSearch } from "src/sections/samples/samples-search";
+import { MissingsSamplesTable } from "src/sections/samples/missings-samples-table";
 import { applyPagination } from "src/utils/apply-pagination";
 import { TotalResults } from "src/sections/overview/totalResults";
 import { useRouter } from "next/router";
-
-const now = new Date();
-
-// const data = [
-//   {
-//     id: "1",
-//     nombre: "nombre 1",
-//     documentoIdentidad: "documentoIdentidad 1",
-//     tipoDocumento: "tipoDocumento 1",
-//     primerApellido: "primerApellido 1",
-//     segundoApellido: "segundoApellido 1",
-//     genero: "genero 1",
-//     sirdec: "sirdec 1",
-//     lugarNacimiento: {
-//       departamento: "departamento 1",
-//       municipio: "municipio 1",
-//     },
-//     lugarTomaCuerpo: {
-//       departamento: "departamento 1",
-//       municipio: "municipio 1",
-//     },
-//     muestras: [
-//       {
-//         id: "1",
-//         tipoMuestra: "tipo 1",
-//         lugarTomaMuestra: {
-//           departamento: "departamento 1",
-//           municipio: "municipio 1",
-//         },
-//         estadoMuestra: "estado 1",
-//         fechaTomaMuestra: "2023-04-01",
-//         fechaLlegadaLaboratorio: "2023-05-01",
-//         consentimientoPoblacional: true,
-//         muestradante: {
-//           id: "1",
-//           documentoIdentidad: "documentoIdentidad 1",
-//           nombre: "nombre 1",
-//           primerApellido: "primerApellido 1",
-//           segundoApellido: "segundoApellido 1",
-//           parentesco: "parentesco 1",
-//           fechaNacimiento: "1987-11-21",
-//           lugarNacimiento: {
-//             departamento: "departamento 1",
-//             municipio: "municipio 1",
-//           },
-//           direccion: "direccion 1",
-//           tipoDocumento: "tipoDocumento 1",
-//         },
-//         anexo: {
-//           ot: "ot 1",
-//           perito: "perito 1",
-//           observaciones: "observaciones 1",
-//           uriDocumentacion: "enlace",
-//         },
-//       },
-//     ],
-//   },
-// ];
 
 const searchResult = [];
 
@@ -126,7 +67,6 @@ const Page = () => {
       });
 
       const result = await response.json();
-      console.log(result);
       setSearchResult(result);
     };
 
@@ -149,7 +89,7 @@ const Page = () => {
           <Stack spacing={3}>
             <Stack direction="row" justifyContent="space-between" spacing={4}>
               <Stack spacing={1}>
-                <Typography variant="h4">Registro de muestras del desaparecido</Typography>
+                <Typography variant="h4">Registro de muestras asociadas al desaparecido</Typography>
               </Stack>
               <div>
                 <Button
@@ -193,11 +133,9 @@ const Page = () => {
               </>
             )}
 
-            {console.log(SamplesSearch.length)}
-
             {searchResult[0]?.muestrasDesaparecidos.length > 0 && (
               <>
-                <SamplesTable
+                <MissingsSamplesTable
                   count={searchResult[0].muestrasDesaparecidos.length}
                   items={searchResult[0].muestrasDesaparecidos}
                   onDeselectAll={customersSelection.handleDeselectAll}

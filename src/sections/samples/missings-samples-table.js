@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { Scrollbar } from "src/components/scrollbar";
 
-export const SamplesTable = (props) => {
+export const MissingsSamplesTable = (props) => {
   const {
     count = 0,
     items = [],
@@ -52,6 +52,7 @@ export const SamplesTable = (props) => {
                     }}
                   />
                 </TableCell>
+                <TableCell>#</TableCell>
                 <TableCell>Muestra ID</TableCell>
                 <TableCell>Muestradante ID</TableCell>
                 <TableCell>Documento Muestradante</TableCell>
@@ -67,7 +68,7 @@ export const SamplesTable = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {items.map((resultado) => {
+              {items.map((resultado, index) => {
                 const isSelected = selected.includes(resultado.id);
 
                 return (
@@ -84,6 +85,7 @@ export const SamplesTable = (props) => {
                         }}
                       />
                     </TableCell>
+                    <TableCell>{index}</TableCell>
                     <TableCell>
                       <Stack alignItems="center" direction="row" spacing={2}>
                         <Typography variant="subtitle2">{resultado.muestraId}</Typography>
@@ -131,7 +133,7 @@ export const SamplesTable = (props) => {
   );
 };
 
-SamplesTable.propTypes = {
+MissingsSamplesTable.propTypes = {
   count: PropTypes.number,
   items: PropTypes.array,
   onDeselectAll: PropTypes.func,

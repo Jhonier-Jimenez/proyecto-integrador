@@ -17,62 +17,6 @@ import { MissingsSearch } from "src/sections/missings/missings-search";
 import { applyPagination } from "src/utils/apply-pagination";
 import { TotalResults } from "src/sections/overview/totalResults";
 
-// const searchResult = [
-//   {
-//     id: "1",
-//     nombre: "nombre 1",
-//     documentoIdentidad: "documentoIdentidad 1",
-//     tipoDocumento: "tipoDocumento 1",
-//     primerApellido: "primerApellido 1",
-//     segundoApellido: "segundoApellido 1",
-//     genero: "genero 1",
-//     sirdec: "sirdec 1",
-//     lugarNacimiento: {
-//       departamento: "departamento 1",
-//       municipio: "municipio 1",
-//     },
-//     lugarTomaCuerpo: {
-//       departamento: "departamento 1",
-//       municipio: "municipio 1",
-//     },
-//     muestras: [
-//       {
-//         id: "1",
-//         tipoMuestra: "tipo 1",
-//         lugarTomaMuestra: {
-//           departamento: "departamento 1",
-//           municipio: "municipio 1",
-//         },
-//         estadoMuestra: "estado 1",
-//         fechaTomaMuestra: "2023-04-01",
-//         fechaLlegadaLaboratorio: "2023-05-01",
-//         consentimientoPoblacional: true,
-//         muestradante: {
-//           id: "1",
-//           documentoIdentidad: "documentoIdentidad 1",
-//           nombre: "nombre 1",
-//           primerApellido: "primerApellido 1",
-//           segundoApellido: "segundoApellido 1",
-//           parentesco: "parentesco 1",
-//           fechaNacimiento: "1987-11-21",
-//           lugarNacimiento: {
-//             departamento: "departamento 1",
-//             municipio: "municipio 1",
-//           },
-//           direccion: "direccion 1",
-//           tipoDocumento: "tipoDocumento 1",
-//         },
-//         anexo: {
-//           ot: "ot 1",
-//           perito: "perito 1",
-//           observaciones: "observaciones 1",
-//           uriDocumentacion: "enlace",
-//         },
-//       },
-//     ],
-//   },
-// ];
-
 const searchResult = [];
 
 const useCustomers = (page, rowsPerPage) => {

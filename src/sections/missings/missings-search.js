@@ -38,7 +38,7 @@ export const MissingsSearch = ({ onSearch }) => {
       <Card>
         <CardHeader
           subheader="Para mayor precisión, puedes llenar todos los campos; pero sólo el campo del nombre es obligatorio"
-          title="Datos del desaparecido"
+          title="Criterios de búsqueda del desaparecido"
         />
 
         <CardContent className={styles.inputsContainer}>
