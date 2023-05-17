@@ -1,3 +1,9 @@
 .inputsContainer {
   display: flex;
 }
+
+.searchOptionsContainer {
+  display: flex;
+  max-width: 800px;
+  flex-wrap: wrap;
+}

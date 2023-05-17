@@ -48,7 +48,7 @@ const Page = () => {
     setRowsPerPage(event.target.value);
   }, []);
 
-  const handleSearch = async (searchData) => {
+  const handleSearchByName = async (searchData) => {
     const url = "http://localhost:80/api/Muestradante/filter";
 
     const response = await fetch(url, {
@@ -61,6 +61,24 @@ const Page = () => {
 
     const result = await response.json();
     setSearchResult(result);
+  };
+
+  const handleSearchByDocument = async (documentoDeIdentidad) => {
+    const url = `http://localhost:80/api/Muestradante/identificacion/${documentoDeIdentidad}`;
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    try {
+      const result = await response.json();
+      setSearchResult(result);
+    } catch (error) {
+      console.error("The response from the server is empty:", error);
+    }
   };
 
   return (
@@ -81,7 +99,10 @@ const Page = () => {
               <Typography variant="h4">Búsqueda de muestradantes</Typography>
             </Stack>
 
-            <DonorsSearch onSearch={handleSearch} />
+            <DonorsSearch
+              handleSearchByName={handleSearchByName}
+              handleSearchByDocument={handleSearchByDocument}
+            />
             {searchResult.length > 0 && (
               <Grid container justifyContent="center" spacing={3}>
                 <Grid xs={12} sm={6} lg={3}>

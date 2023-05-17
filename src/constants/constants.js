@@ -182,3 +182,14 @@ export const departamentos = [
     label: "Vichada",
   },
 ];
+
+export const opcionesBusqueda = [
+  {
+    value: "documentoDeIdentidad",
+    label: "Documento de Identidad",
+  },
+  {
+    value: "nombresYApellidos",
+    label: "Nombres y Apellidos",
+  },
+];

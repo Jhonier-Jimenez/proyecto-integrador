@@ -63,6 +63,7 @@ export const DonorsTable = (props) => {
                 <TableCell>Lugar de Nacimiento</TableCell>
                 <TableCell>Fecha de Nacimiento</TableCell>
                 <TableCell>Muestra</TableCell>
+                <TableCell>Desaparecidos</TableCell>
                 <TableCell>Parentesco</TableCell>
                 <TableCell>Dirección</TableCell>
                 <TableCell>Teléfono</TableCell>
@@ -108,6 +109,11 @@ export const DonorsTable = (props) => {
                     <TableCell>
                       <Link href={`/muestra-muestradante?muestradanteID=${resultado.id}`}>
                         Ver detalle
+                      </Link>
+                    </TableCell>
+                    <TableCell>
+                      <Link href={`/desaparecidos-muestradante?muestradanteID=${resultado.id}`}>
+                        Ver detalles
                       </Link>
                     </TableCell>
                     <TableCell>{resultado.parentesco}</TableCell>
