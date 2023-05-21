@@ -59,7 +59,7 @@ export const mainItems = [
 export const searchitems = [
   {
     title: "Búsqueda de desaparecidos",
-    path: "/busqueda-desaparecidos",
+    path: "/busqueda/desaparecidos/busqueda-desaparecidos",
     icon: (
       <SvgIcon fontSize="small">
         <MagnifyingGlassCircleIcon />
@@ -69,7 +69,7 @@ export const searchitems = [
 
   {
     title: "Búsqueda de muestradantes",
-    path: "/busqueda-muestradante",
+    path: "/busqueda/muestradantes/busqueda-muestradante",
     icon: (
       <SvgIcon fontSize="small">
         <MagnifyingGlassCircleIcon />
@@ -81,7 +81,16 @@ export const searchitems = [
 export const newRegisterItems = [
   {
     title: "Agregar desaparecido",
-    path: "/agregar-desaparecido",
+    path: "/nuevo-registro/desaparecido/agregar-desaparecido",
+    icon: (
+      <SvgIcon fontSize="small">
+        <UsersIcon />
+      </SvgIcon>
+    ),
+  },
+  {
+    title: "Agregar muestradante",
+    path: "/nuevo-registro/muestradante/agregar-muestradante",
     icon: (
       <SvgIcon fontSize="small">
         <UsersIcon />

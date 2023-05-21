@@ -13,7 +13,7 @@ import {
 
 import { tiposDocumento, generos, departamentos } from "src/constants/constants";
 
-export const MissingsForm = ({ onSearch }) => {
+export const DonorsForm = ({ onSearch }) => {
   const [values, setValues] = useState({
     nombre: "",
     primerApellido: "",

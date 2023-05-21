@@ -41,7 +41,7 @@ export const tiposDocumento = [
   },
 ];
 
-export const genero = [
+export const generos = [
   {
     value: "masculino",
     label: "Masculino",

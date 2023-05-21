@@ -107,12 +107,16 @@ export const DonorsTable = (props) => {
                     </TableCell>
                     <TableCell>{resultado.fechaNacimiento}</TableCell>
                     <TableCell>
-                      <Link href={`/muestra-muestradante?muestradanteID=${resultado.id}`}>
+                      <Link
+                        href={`/busqueda/muestradantes/muestra-muestradante?muestradanteID=${resultado.id}`}
+                      >
                         Ver detalle
                       </Link>
                     </TableCell>
                     <TableCell>
-                      <Link href={`/desaparecidos-muestradante?muestradanteID=${resultado.id}`}>
+                      <Link
+                        href={`/busqueda/muestradantes/desaparecidos-del-muestradante?muestradanteID=${resultado.id}`}
+                      >
                         Ver detalles
                       </Link>
                     </TableCell>

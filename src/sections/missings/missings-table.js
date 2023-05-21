@@ -111,7 +111,9 @@ export const MissingsTable = (props) => {
                     </TableCell>
 
                     <TableCell>
-                      <Link href={`/muestras-desaparecido?desaparecidoID=${resultado.id}`}>
+                      <Link
+                        href={`/busqueda/desaparecidos/muestras-desaparecido?desaparecidoID=${resultado.id}`}
+                      >
                         Ver muestras
                       </Link>
                     </TableCell>

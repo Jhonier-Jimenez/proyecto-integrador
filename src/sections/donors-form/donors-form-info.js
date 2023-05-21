@@ -1,6 +1,6 @@
 import { Box, Button, Card, CardActions, CardContent, Divider, Typography } from "@mui/material";
 
-export const MissingsFormInfo = () => (
+export const DonorsFormInfo = () => (
   <Card>
     <CardContent>
       <Box
