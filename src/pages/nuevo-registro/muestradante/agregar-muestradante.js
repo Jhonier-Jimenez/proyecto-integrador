@@ -102,14 +102,14 @@ const Page = () => {
                 Registro guardado exitosamente
               </Typography>
               <Typography color="text.secondary" variant="body2">
-                Ahora también puede consultarlo en el espacio de búsqueda
+                Ahora procederá a agregar una muestra asociada
               </Typography>
             </Box>
           </CardContent>
           <Divider />
           <CardActions>
             <Button onClick={handleClose} fullWidth variant="text">
-              Aceptar
+              Continuar
             </Button>
           </CardActions>
         </Card>

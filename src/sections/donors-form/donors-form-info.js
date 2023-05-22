@@ -14,7 +14,8 @@ export const DonorsFormInfo = () => (
           Información importante
         </Typography>
         <Typography color="text.secondary" variant="body2">
-          No existen requisitos previos para agregar un nuevo desaparecido
+          Para agregar un nuevo muestradante es necesario que conozcas el nombre ó el ID del
+          desaparecido al cual finalmente asociarás su muestra
         </Typography>
       </Box>
     </CardContent>

@@ -10,8 +10,10 @@ import {
   TextField,
   Unstable_Grid2 as Grid,
 } from "@mui/material";
+import { format } from "date-fns";
 
 import { tiposDocumento, generos, departamentos } from "src/constants/constants";
+import { DatePicker } from "@mui/x-date-pickers";
 
 export const DonorsForm = ({ onSearch }) => {
   const [values, setValues] = useState({
@@ -20,18 +22,29 @@ export const DonorsForm = ({ onSearch }) => {
     segundoApellido: "",
     tipoDocumento: "cedulaDeCiudadania",
     documentoIdentidad: "",
-    genero: "masculino",
-    sirdec: "",
-    lugarNacimientoDepartamento: "amazonas",
-    lugarNacimientoMunicipio: "",
-    lugarTomaCuerpoDepartamento: "amazonas",
-    lugarTomaCuerpoMunicipio: "",
+    // genero: "masculino",
+    parentesco: "",
+    fechaNacimiento: "",
+    departamento: "amazonas",
+    municipio: "",
+    direccion: "",
+    telefono: "",
   });
 
   const handleChange = (event) => {
     setValues((prevState) => ({
       ...prevState,
       [event.target.name]: event.target.value,
+    }));
+  };
+
+  const handleDateChange = (date) => {
+    const formattedDate = date.toLocaleDateString("en-US");
+    console.log(date);
+    console.log(formattedDate);
+    setValues((prevState) => ({
+      ...prevState,
+      fechaNacimiento: formattedDate,
     }));
   };
 
@@ -45,7 +58,7 @@ export const DonorsForm = ({ onSearch }) => {
       <Card>
         <CardHeader
           subheader="Todos los campos marcados con * son obligatorios"
-          title="Datos del desaparecido"
+          title="Datos del muestradante"
         />
         <CardContent sx={{ pt: 0 }}>
           <Box sx={{ m: -1.5 }}>
@@ -54,7 +67,7 @@ export const DonorsForm = ({ onSearch }) => {
                 <TextField
                   required
                   fullWidth
-                  helperText="Texto de ayuda"
+                  helperText="Nombres separados por un espacio"
                   label="Nombres"
                   name="nombre"
                   onChange={handleChange}
@@ -62,6 +75,7 @@ export const DonorsForm = ({ onSearch }) => {
               </Grid>
               <Grid xs={12} md={6}>
                 <TextField
+                  required
                   fullWidth
                   label="Primer Apellido"
                   name="primerApellido"
@@ -78,6 +92,7 @@ export const DonorsForm = ({ onSearch }) => {
               </Grid>
               <Grid xs={12} md={6}>
                 <TextField
+                  required
                   fullWidth
                   label="Tipo de Documento"
                   name="tipoDocumento"
@@ -94,13 +109,14 @@ export const DonorsForm = ({ onSearch }) => {
               </Grid>
               <Grid xs={12} md={6}>
                 <TextField
+                  required
                   fullWidth
                   label="Número de documento"
                   name="documentoIdentidad"
                   onChange={handleChange}
                 />
               </Grid>
-              <Grid xs={12} md={6}>
+              {/* <Grid xs={12} md={6}>
                 <TextField
                   fullWidth
                   label="Género"
@@ -116,16 +132,33 @@ export const DonorsForm = ({ onSearch }) => {
                     </option>
                   ))}
                 </TextField>
+              </Grid> */}
+              <Grid xs={12} md={6}>
+                <TextField
+                  required
+                  fullWidth
+                  label="Parentesco"
+                  name="parentesco"
+                  onChange={handleChange}
+                />
               </Grid>
               <Grid xs={12} md={6}>
-                <TextField fullWidth label="Sirdec" name="sirdec" onChange={handleChange} />
+                <DatePicker
+                  required
+                  fullWidth
+                  label="Fecha de Nacimiento"
+                  name="fechaNacimiento"
+                  value={values.fechaNacimiento}
+                  onChange={handleDateChange}
+                  renderInput={(params) => <TextField fullWidth {...params} />}
+                />
               </Grid>
 
               <Grid xs={12} md={6}>
                 <TextField
                   fullWidth
                   label="Departamento de nacimiento"
-                  name="lugarNacimientoDepartamento"
+                  name="departamento"
                   onChange={handleChange}
                   required
                   select
@@ -141,9 +174,28 @@ export const DonorsForm = ({ onSearch }) => {
 
               <Grid xs={12} md={6}>
                 <TextField
+                  required
                   fullWidth
                   label="Municipio de Nacimiento"
-                  name="lugarNacimientoMunicipio"
+                  name="municipio"
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid xs={12} md={6}>
+                <TextField
+                  required
+                  fullWidth
+                  label="Dirección de residencia"
+                  name="direccion"
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid xs={12} md={6}>
+                <TextField
+                  required
+                  fullWidth
+                  label="Teléfono"
+                  name="telefono"
                   onChange={handleChange}
                 />
               </Grid>
@@ -151,38 +203,6 @@ export const DonorsForm = ({ onSearch }) => {
           </Box>
         </CardContent>
 
-        <CardHeader title="Lugar de la toma del cuerpo" />
-        <CardContent sx={{ pt: 0 }}>
-          <Box sx={{ m: -1.5 }}>
-            <Grid container spacing={3}>
-              <Grid xs={12} md={6}>
-                <TextField
-                  fullWidth
-                  label="Departamento de la toma del cuerpo"
-                  name="lugarTomaCuerpoDepartamento"
-                  onChange={handleChange}
-                  required
-                  select
-                  SelectProps={{ native: true }}
-                >
-                  {departamentos.map((departamento) => (
-                    <option key={departamento.value} value={departamento.value}>
-                      {departamento.label}
-                    </option>
-                  ))}
-                </TextField>
-              </Grid>
-              <Grid xs={12} md={6}>
-                <TextField
-                  fullWidth
-                  label="Municipio de la toma del cuerpo"
-                  name="lugarTomaCuerpoMunicipio"
-                  onChange={handleChange}
-                />
-              </Grid>
-            </Grid>
-          </Box>
-        </CardContent>
         <Divider />
         <CardActions sx={{ justifyContent: "flex-end" }}>
           <Button type="submit" variant="contained">

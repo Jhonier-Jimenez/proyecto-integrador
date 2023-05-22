@@ -52,9 +52,8 @@ export const MissingsForm = ({ onSearch }) => {
             <Grid container spacing={3}>
               <Grid xs={12} md={6}>
                 <TextField
-                  required
                   fullWidth
-                  helperText="Texto de ayuda"
+                  helperText="Nombres separados por un espacio"
                   label="Nombres"
                   name="nombre"
                   onChange={handleChange}
@@ -118,7 +117,13 @@ export const MissingsForm = ({ onSearch }) => {
                 </TextField>
               </Grid>
               <Grid xs={12} md={6}>
-                <TextField fullWidth label="Sirdec" name="sirdec" onChange={handleChange} />
+                <TextField
+                  fullWidth
+                  label="Sirdec"
+                  name="sirdec"
+                  onChange={handleChange}
+                  required
+                />
               </Grid>
 
               <Grid xs={12} md={6}>
@@ -127,7 +132,6 @@ export const MissingsForm = ({ onSearch }) => {
                   label="Departamento de nacimiento"
                   name="lugarNacimientoDepartamento"
                   onChange={handleChange}
-                  required
                   select
                   SelectProps={{ native: true }}
                 >
@@ -178,6 +182,7 @@ export const MissingsForm = ({ onSearch }) => {
                   label="Municipio de la toma del cuerpo"
                   name="lugarTomaCuerpoMunicipio"
                   onChange={handleChange}
+                  required
                 />
               </Grid>
             </Grid>
