@@ -13,7 +13,7 @@ import {
 
 import { tiposDocumento, generos, departamentos } from "src/constants/constants";
 
-export const MissingsForm = ({ onSearch }) => {
+export const MissingsForm = ({ onSend }) => {
   const [values, setValues] = useState({
     nombre: "",
     primerApellido: "",
@@ -37,7 +37,7 @@ export const MissingsForm = ({ onSearch }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSearch(values);
+    onSend(values);
   };
 
   return (

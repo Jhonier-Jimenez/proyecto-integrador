@@ -12,23 +12,25 @@ import {
 } from "@mui/material";
 import { format } from "date-fns";
 
-import { tiposDocumento, generos, departamentos } from "src/constants/constants";
+import {
+  departamentos,
+  tiposDeMuestra,
+  estadosDeMuestra,
+  consentimientoPoblacional,
+} from "src/constants/constants";
 import { DatePicker } from "@mui/x-date-pickers";
 
-export const DonorsForm = ({ onSend }) => {
+export const SamplesForm = ({ onSend, documentoIdentidadMuestradante }) => {
   const [values, setValues] = useState({
-    nombre: "",
-    primerApellido: "",
-    segundoApellido: "",
-    tipoDocumento: "cedulaDeCiudadania",
-    documentoIdentidad: "",
-    // genero: "masculino",
-    parentesco: "",
-    fechaNacimiento: "",
+    radicadoInterno: "",
+    tipoMuestra: "sangre",
+    estadoMuestra: "valida",
+    fechaTomaMuestra: "",
+    consentimientoPoblacional: "true",
+    fechaLlegadaLaboratorio: "",
     departamento: "amazonas",
     municipio: "",
-    direccion: "",
-    telefono: "",
+    documentoIdentidadMuestradante: documentoIdentidadMuestradante,
   });
 
   const handleChange = (event) => {
@@ -38,11 +40,19 @@ export const DonorsForm = ({ onSend }) => {
     }));
   };
 
-  const handleDateChange = (date) => {
+  const handleDateChangeTaken = (date) => {
     const formattedDate = format(date, "yyyy/MM/dd");
     setValues((prevState) => ({
       ...prevState,
-      fechaNacimiento: formattedDate,
+      fechaTomaMuestra: formattedDate,
+    }));
+  };
+
+  const handleDateChangeArrival = (date) => {
+    const formattedDate = format(date, "yyyy/MM/dd");
+    setValues((prevState) => ({
+      ...prevState,
+      fechaLlegadaLaboratorio: formattedDate,
     }));
   };
 
@@ -56,7 +66,7 @@ export const DonorsForm = ({ onSend }) => {
       <Card>
         <CardHeader
           subheader="Todos los campos marcados con * son obligatorios"
-          title="Datos del muestradante"
+          title="Datos de la muestra"
         />
         <CardContent sx={{ pt: 0 }}>
           <Box sx={{ m: -1.5 }}>
@@ -65,9 +75,8 @@ export const DonorsForm = ({ onSend }) => {
                 <TextField
                   required
                   fullWidth
-                  helperText="Nombres separados por un espacio"
-                  label="Nombres"
-                  name="nombre"
+                  label="Radicado Interno"
+                  name="radicadoInterno"
                   onChange={handleChange}
                 />
               </Grid>
@@ -75,32 +84,15 @@ export const DonorsForm = ({ onSend }) => {
                 <TextField
                   required
                   fullWidth
-                  label="Primer Apellido"
-                  name="primerApellido"
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid xs={12} md={6}>
-                <TextField
-                  fullWidth
-                  label="Segundo Apellido"
-                  name="segundoApellido"
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid xs={12} md={6}>
-                <TextField
-                  required
-                  fullWidth
-                  label="Tipo de Documento"
-                  name="tipoDocumento"
+                  label="Tipo de muestra"
+                  name="tipoMuestra"
                   onChange={handleChange}
                   select
                   SelectProps={{ native: true }}
                 >
-                  {tiposDocumento.map((tipoDocumento) => (
-                    <option key={tipoDocumento.value} value={tipoDocumento.value}>
-                      {tipoDocumento.label}
+                  {tiposDeMuestra.map((tipoMuestra) => (
+                    <option key={tipoMuestra.value} value={tipoMuestra.value}>
+                      {tipoMuestra.label}
                     </option>
                   ))}
                 </TextField>
@@ -109,53 +101,63 @@ export const DonorsForm = ({ onSend }) => {
                 <TextField
                   required
                   fullWidth
-                  label="Número de documento"
-                  name="documentoIdentidad"
+                  label="Estado de la muestra"
+                  name="estadoMuestra"
                   onChange={handleChange}
-                />
-              </Grid>
-              {/* <Grid xs={12} md={6}>
-                <TextField
-                  fullWidth
-                  label="Género"
-                  name="genero"
-                  onChange={handleChange}
-                  required
                   select
                   SelectProps={{ native: true }}
                 >
-                  {generos.map((genero) => (
-                    <option key={genero.value} value={genero.value}>
-                      {genero.label}
+                  {estadosDeMuestra.map((estadoMuestra) => (
+                    <option key={estadoMuestra.value} value={estadoMuestra.value}>
+                      {estadoMuestra.label}
                     </option>
                   ))}
                 </TextField>
-              </Grid> */}
+              </Grid>
               <Grid xs={12} md={6}>
-                <TextField
+                <DatePicker
                   required
                   fullWidth
-                  label="Parentesco"
-                  name="parentesco"
-                  onChange={handleChange}
+                  label="Fecha de toma de la muestra"
+                  name="fechaTomaMuestra"
+                  value={values.fechaTomaMuestra}
+                  onChange={handleDateChangeTaken}
+                  renderInput={(params) => <TextField fullWidth {...params} />}
                 />
               </Grid>
               <Grid xs={12} md={6}>
                 <DatePicker
                   required
                   fullWidth
-                  label="Fecha de Nacimiento"
-                  name="fechaNacimiento"
-                  value={values.fechaNacimiento}
-                  onChange={handleDateChange}
+                  label="Fecha de llegada al laboratorio"
+                  name="fechaLlegadaLaboratorio"
+                  value={values.fechaLlegadaLaboratorio}
+                  onChange={handleDateChangeArrival}
                   renderInput={(params) => <TextField fullWidth {...params} />}
                 />
+              </Grid>
+              <Grid xs={12} md={6}>
+                <TextField
+                  required
+                  fullWidth
+                  label="Consentimiento poblacional"
+                  name="consentimientoPoblacional"
+                  onChange={handleChange}
+                  select
+                  SelectProps={{ native: true }}
+                >
+                  {consentimientoPoblacional.map((consentimiento) => (
+                    <option key={consentimiento.value} value={consentimiento.value}>
+                      {consentimiento.label}
+                    </option>
+                  ))}
+                </TextField>
               </Grid>
 
               <Grid xs={12} md={6}>
                 <TextField
                   fullWidth
-                  label="Departamento de nacimiento"
+                  label="Departamento de toma de la muestra"
                   name="departamento"
                   onChange={handleChange}
                   required
@@ -174,26 +176,8 @@ export const DonorsForm = ({ onSend }) => {
                 <TextField
                   required
                   fullWidth
-                  label="Municipio de Nacimiento"
+                  label="Municipio de toma de la muestra"
                   name="municipio"
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid xs={12} md={6}>
-                <TextField
-                  required
-                  fullWidth
-                  label="Dirección de residencia"
-                  name="direccion"
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid xs={12} md={6}>
-                <TextField
-                  required
-                  fullWidth
-                  label="Teléfono"
-                  name="telefono"
                   onChange={handleChange}
                 />
               </Grid>

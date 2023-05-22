@@ -10,19 +10,25 @@ import {
   CardContent,
   CardActions,
   Divider,
+  Link,
   Unstable_Grid2 as Grid,
 } from "@mui/material";
 import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
-import { MissingsForm } from "src/sections/missings-form/missings-form";
-import { MissingsFormInfo } from "src/sections/missings-form/missings-form-info";
+import { SamplesForm } from "src/sections/samples-form/samples-form";
+import { SamplesFormInfo } from "src/sections/samples-form/samples-form-info";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 const Page = () => {
-  const [sendData, setSendData] = useState(null);
+  const [IDMuestra, setIDMuestra] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
+  const router = useRouter();
+  const { documentoIdentidadMuestradante, nombreMuestradante, primerApellido, segundoApellido } =
+    router.query;
+
   const handleSend = async (sendData) => {
-    const url = "http://localhost:80/api/Desaparecido";
+    const url = "http://localhost:80/api/Muestra";
 
     const response = await fetch(url, {
       method: "POST",
@@ -34,19 +40,19 @@ const Page = () => {
 
     const result = await response.json();
     if (result) {
-      setSendData(result);
+      setIDMuestra(result);
       setShowModal(true);
     }
   };
 
-  const handleClose = () => {
+  const handleContinue = () => {
     setShowModal(false);
   };
 
   return (
     <>
       <Head>
-        <title>Registro de muestras y desaparecidos CTI | Agregar desaparecido</title>
+        <title>Registro de muestras y desaparecidos CTI | Agregar muestra</title>
       </Head>
       <Box
         component="main"
@@ -58,15 +64,21 @@ const Page = () => {
         <Container maxWidth="lg">
           <Stack spacing={3}>
             <div>
-              <Typography variant="h4">Agregar nuevo desaparecido</Typography>
+              <Typography variant="h4">Agregar nueva muestra</Typography>
             </div>
             <div>
               <Grid container spacing={3}>
                 <Grid xs={12} md={6} lg={4}>
-                  <MissingsFormInfo />
+                  <SamplesFormInfo
+                    documentoIdentidad={documentoIdentidadMuestradante}
+                    nombres={nombreMuestradante}
+                  />
                 </Grid>
                 <Grid xs={12} md={6} lg={8}>
-                  <MissingsForm onSend={handleSend} />
+                  <SamplesForm
+                    onSend={handleSend}
+                    documentoIdentidadMuestradante={documentoIdentidadMuestradante}
+                  />
                 </Grid>
               </Grid>
             </div>
@@ -76,7 +88,6 @@ const Page = () => {
 
       <Modal
         open={showModal}
-        onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         sx={{
@@ -99,17 +110,22 @@ const Page = () => {
                 Información importante
               </Typography>
               <Typography color="text.secondary" variant="body2">
-                Desaparecido guardado exitosamente
+                Muestra guardada exitosamente
               </Typography>
               <Typography color="text.secondary" variant="body2">
-                Ahora también puede consultarlo en el espacio de búsqueda
+                Ahora procederá a vincular esta muestra con un desaparecido
               </Typography>
             </Box>
           </CardContent>
           <Divider />
           <CardActions>
-            <Button onClick={handleClose} fullWidth variant="text">
-              Aceptar
+            <Button onClick={handleContinue} fullWidth variant="text">
+              {/* <Link
+                href={`/nuevo-registro/muestradante/vincular-muestra-desaparecido?muestraId=${IDMuestra}`}
+              >
+                Continuar
+              </Link> */}
+              Continuar
             </Button>
           </CardActions>
         </Card>

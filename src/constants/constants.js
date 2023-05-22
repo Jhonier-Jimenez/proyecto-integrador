@@ -193,3 +193,40 @@ export const opcionesBusqueda = [
     label: "Nombres y Apellidos",
   },
 ];
+
+export const tiposDeMuestra = [
+  {
+    value: "sangre",
+    label: "Sangre",
+  },
+  {
+    value: "saliva",
+    label: "Saliva",
+  },
+  {
+    value: "cabello",
+    label: "Cabello",
+  },
+];
+
+export const estadosDeMuestra = [
+  {
+    value: "valida",
+    label: "Válida",
+  },
+  {
+    value: "pendiente",
+    label: "Pendiente",
+  },
+];
+
+export const consentimientoPoblacional = [
+  {
+    value: "true",
+    label: "Sí",
+  },
+  {
+    value: "false",
+    label: "No",
+  },
+];

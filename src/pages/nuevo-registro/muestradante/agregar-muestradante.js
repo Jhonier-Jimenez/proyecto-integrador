@@ -10,6 +10,7 @@ import {
   CardContent,
   CardActions,
   Divider,
+  Link,
   Unstable_Grid2 as Grid,
 } from "@mui/material";
 import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
@@ -18,28 +19,28 @@ import { DonorsFormInfo } from "src/sections/donors-form/donors-form-info";
 import { useState } from "react";
 
 const Page = () => {
-  const [searchResult, setSearchResult] = useState(null);
+  const [sendData, setSendData] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
-  const handleSearch = async (searchData) => {
-    const url = "http://localhost:80/api/Desaparecido";
+  const handleSend = async (values) => {
+    const url = "http://localhost:80/api/Muestradante";
 
     const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(searchData),
+      body: JSON.stringify(values),
     });
 
     const result = await response.json();
     if (result) {
+      setSendData(values);
       setShowModal(true);
     }
-    setSearchResult(result);
   };
 
-  const handleClose = () => {
+  const handleContinue = () => {
     setShowModal(false);
   };
 
@@ -66,7 +67,7 @@ const Page = () => {
                   <DonorsFormInfo />
                 </Grid>
                 <Grid xs={12} md={6} lg={8}>
-                  <DonorsForm onSearch={handleSearch} />
+                  <DonorsForm onSend={handleSend} />
                 </Grid>
               </Grid>
             </div>
@@ -74,46 +75,54 @@ const Page = () => {
         </Container>
       </Box>
 
-      <Modal
-        open={showModal}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-        sx={{
-          alignItems: "center",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-        }}
-      >
-        <Card>
-          <CardContent>
-            <Box
-              sx={{
-                alignItems: "center",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <Typography gutterBottom variant="h5">
-                Información importante
-              </Typography>
-              <Typography color="text.secondary" variant="body2">
-                Registro guardado exitosamente
-              </Typography>
-              <Typography color="text.secondary" variant="body2">
-                Ahora procederá a agregar una muestra asociada
-              </Typography>
-            </Box>
-          </CardContent>
-          <Divider />
-          <CardActions>
-            <Button onClick={handleClose} fullWidth variant="text">
-              Continuar
-            </Button>
-          </CardActions>
-        </Card>
-      </Modal>
+      {sendData && (
+        <Modal
+          open={showModal}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          sx={{
+            alignItems: "center",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
+          <Card>
+            <CardContent>
+              <Box
+                sx={{
+                  alignItems: "center",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <Typography gutterBottom variant="h5">
+                  Información importante
+                </Typography>
+                <Typography color="text.secondary" variant="body2">
+                  Muestradante guardado exitosamente
+                </Typography>
+                <Typography color="text.secondary" variant="body2">
+                  Ahora procederá a agregar una muestra asociada
+                </Typography>
+              </Box>
+            </CardContent>
+            <Divider />
+            <CardActions>
+              <Link
+                sx={{
+                  width: "100%",
+                }}
+                href={`/nuevo-registro/muestradante/agregar-muestra?documentoIdentidadMuestradante=${sendData?.documentoIdentidad}&nombreMuestradante=${sendData?.nombre}`}
+              >
+                <Button onClick={handleContinue} fullWidth variant="text">
+                  Continuar
+                </Button>
+              </Link>
+            </CardActions>
+          </Card>
+        </Modal>
+      )}
     </>
   );
 };
