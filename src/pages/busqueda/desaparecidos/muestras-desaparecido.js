@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import { useSelection } from "src/hooks/use-selection";
 import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
-import { MissingsSamplesTable } from "src/sections/samples/missings-samples-table";
+import { MissingsSamplesTable } from "src/sections/samples-tables/missings-samples-table";
 import { applyPagination } from "src/utils/apply-pagination";
 import { TotalResults } from "src/sections/overview/totalResults";
 import { useRouter } from "next/router";

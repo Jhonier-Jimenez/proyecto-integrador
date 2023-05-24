@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import { useSelection } from "src/hooks/use-selection";
 import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
-import { DonorsSamplesTable } from "src/sections/samples/donors-samples-table";
+import { DonorsSamplesTable } from "src/sections/samples-tables/donors-samples-table";
 import { applyPagination } from "src/utils/apply-pagination";
 import { useRouter } from "next/router";
 

@@ -12,8 +12,8 @@ import {
 } from "@mui/material";
 import { useSelection } from "src/hooks/use-selection";
 import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
-import { DonorsTable } from "src/sections/donors/donors-table";
-import { DonorsSearch } from "src/sections/donors/donors-search";
+import { DonorsTable } from "src/sections/donors-search/donors-table";
+import { DonorsSearch } from "src/sections/donors-search/donors-search";
 import { applyPagination } from "src/utils/apply-pagination";
 import { TotalResults } from "src/sections/overview/totalResults";
 

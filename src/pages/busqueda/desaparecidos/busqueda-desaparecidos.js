@@ -12,8 +12,8 @@ import {
 } from "@mui/material";
 import { useSelection } from "src/hooks/use-selection";
 import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
-import { MissingsTable } from "src/sections/missings/missings-table";
-import { MissingsSearch } from "src/sections/missings/missings-search";
+import { MissingsTable } from "src/sections/missings-search/missings-table";
+import { MissingsSearch } from "src/sections/missings-search/missings-search";
 import { applyPagination } from "src/utils/apply-pagination";
 import { TotalResults } from "src/sections/overview/totalResults";
 
