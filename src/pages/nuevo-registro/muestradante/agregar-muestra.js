@@ -120,11 +120,11 @@ const Page = () => {
           <Divider />
           <CardActions>
             <Button onClick={handleContinue} fullWidth variant="text">
-              {/* <Link
+              <Link
                 href={`/nuevo-registro/muestradante/vincular-muestra-desaparecido?muestraId=${IDMuestra}`}
               >
                 Continuar
-              </Link> */}
+              </Link>
               Continuar
             </Button>
           </CardActions>
