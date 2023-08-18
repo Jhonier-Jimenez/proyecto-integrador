@@ -194,6 +194,17 @@ export const opcionesBusqueda = [
   },
 ];
 
+export const opcionesBusquedaVinculacion = [
+  {
+    value: "nombres",
+    label: "Nombres",
+  },
+  {
+    value: "desaparecidoId",
+    label: "ID del desaparecido",
+  },
+];
+
 export const tiposDeMuestra = [
   {
     value: "sangre",

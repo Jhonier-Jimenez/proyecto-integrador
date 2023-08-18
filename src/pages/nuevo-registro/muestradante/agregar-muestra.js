@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
 import { SamplesForm } from "src/sections/samples-form/samples-form";
-import { SamplesFormInfo } from "src/sections/samples-form/samples-form-info";
+import { SamplesInfo } from "src/sections/samples-form/samples-info";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
@@ -24,8 +24,7 @@ const Page = () => {
   const [showModal, setShowModal] = useState(false);
 
   const router = useRouter();
-  const { documentoIdentidadMuestradante, nombreMuestradante, primerApellido, segundoApellido } =
-    router.query;
+  const { documentoIdentidadMuestradante, nombreMuestradante } = router.query;
 
   const handleSend = async (sendData) => {
     const url = "http://localhost:80/api/Muestra";
@@ -69,7 +68,7 @@ const Page = () => {
             <div>
               <Grid container spacing={3}>
                 <Grid xs={12} md={6} lg={4}>
-                  <SamplesFormInfo
+                  <SamplesInfo
                     documentoIdentidad={documentoIdentidadMuestradante}
                     nombres={nombreMuestradante}
                   />
@@ -113,20 +112,22 @@ const Page = () => {
                 Muestra guardada exitosamente
               </Typography>
               <Typography color="text.secondary" variant="body2">
-                Ahora procederá a vincular esta muestra con un desaparecido
+                Ahora procederá a vincular el muestradante con un desaparecido
               </Typography>
             </Box>
           </CardContent>
           <Divider />
           <CardActions>
-            <Button onClick={handleContinue} fullWidth variant="text">
-              <Link
-                href={`/nuevo-registro/muestradante/vincular-muestra-desaparecido?muestraId=${IDMuestra}`}
-              >
+            <Link
+              sx={{
+                width: "100%",
+              }}
+              href={`/nuevo-registro/muestradante/vincular-muestra-desaparecido?muestraId=${IDMuestra}&documentoIdentidadMuestradante=${documentoIdentidadMuestradante}&nombreMuestradante=${nombreMuestradante}`}
+            >
+              <Button onClick={handleContinue} fullWidth variant="text">
                 Continuar
-              </Link>
-              Continuar
-            </Button>
+              </Button>
+            </Link>
           </CardActions>
         </Card>
       </Modal>

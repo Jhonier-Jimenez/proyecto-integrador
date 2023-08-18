@@ -1,6 +1,6 @@
 import { Box, Button, Card, CardActions, CardContent, Divider, Typography } from "@mui/material";
 
-export const SamplesFormInfo = ({ documentoIdentidad, nombres }) => (
+export const SamplesInfo = ({ documentoIdentidad, nombres }) => (
   <Card>
     <CardContent>
       <Box

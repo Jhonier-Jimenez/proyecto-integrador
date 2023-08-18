@@ -11,7 +11,6 @@ import {
   Divider,
   Grid,
   TextField,
-  Box,
 } from "@mui/material";
 import { useCallback, useState } from "react";
 import { opcionesBusqueda } from "src/constants/constants";
@@ -61,8 +60,8 @@ export const DonorsSearch = ({ handleSearchByName, handleSearchByDocument }) => 
           <Grid container>
             <TextField
               fullWidth
-              label="Tipo de Documento"
-              name="tipoDocumento"
+              label="Buscar por"
+              name="criterioDeBusqueda"
               onChange={handleChangeSearchOption}
               select
               SelectProps={{ native: true }}

@@ -155,7 +155,7 @@ export const MissingsForm = ({ onSend }) => {
           </Box>
         </CardContent>
 
-        <CardHeader title="Lugar de la toma del cuerpo" />
+        <CardHeader title="Lugar de exhumación" />
         <CardContent sx={{ pt: 0 }}>
           <Box sx={{ m: -1.5 }}>
             <Grid container spacing={3}>
@@ -165,7 +165,6 @@ export const MissingsForm = ({ onSend }) => {
                   label="Departamento de la toma del cuerpo"
                   name="lugarTomaCuerpoDepartamento"
                   onChange={handleChange}
-                  required
                   select
                   SelectProps={{ native: true }}
                 >
@@ -182,7 +181,6 @@ export const MissingsForm = ({ onSend }) => {
                   label="Municipio de la toma del cuerpo"
                   name="lugarTomaCuerpoMunicipio"
                   onChange={handleChange}
-                  required
                 />
               </Grid>
             </Grid>

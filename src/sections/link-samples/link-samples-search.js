@@ -1,4 +1,4 @@
-import styles from "./donors-search.module.css";
+import styles from "./link-samples-search.module.css";
 import MagnifyingGlassIcon from "@heroicons/react/24/solid/MagnifyingGlassIcon";
 import {
   Card,
@@ -11,12 +11,18 @@ import {
   Divider,
   Grid,
   TextField,
-  Box,
+  Stack,
 } from "@mui/material";
 import { useCallback, useState } from "react";
-import { opcionesBusqueda } from "src/constants/constants";
+import { opcionesBusquedaVinculacion } from "src/constants/constants";
+import { LinkSamplesInfo } from "./link-samples-info";
 
-export const DonorsSearch = ({ handleSearchByName, handleSearchByDocument }) => {
+export const LinkSamplesSearch = ({
+  handleSearchByName,
+  handleSearchByID,
+  documentoIdentidadMuestradante,
+  nombreMuestradante,
+}) => {
   const [searchOption, setSearchOption] = useState("documentoDeIdentidad");
 
   const handleSubmitName = useCallback((event) => {
@@ -30,11 +36,10 @@ export const DonorsSearch = ({ handleSearchByName, handleSearchByDocument }) => 
     handleSearchByName(searchData);
   }, []);
 
-  const handleSubmitDocument = useCallback((event) => {
+  const handleSubmitID = useCallback((event) => {
     event.preventDefault();
-    const documentoDeIdentidad = event.target.elements.documentoDeIdentidad.value;
-
-    handleSearchByDocument(documentoDeIdentidad);
+    const desaparecidoId = event.target.elements.desaparecidoId.value;
+    handleSearchByID(desaparecidoId);
   }, []);
 
   const formatSearchData = (nombres, primerApellido, segundoApellido) => {
@@ -52,43 +57,52 @@ export const DonorsSearch = ({ handleSearchByName, handleSearchByDocument }) => 
 
   return (
     <>
-      <Card className={styles.searchOptionsContainer}>
-        <CardHeader
-          subheader="Puede elegir buscar por nombre o por ID del desaparecido"
-          title="Seleccione la opción de búsqueda"
+      <Stack direction="row" justifyContent="space-between" spacing={4}>
+        <Stack>
+          <Card className={styles.searchOptionsContainer}>
+            <CardHeader
+              subheader="Puede elegir buscar por nombre o por ID del desaparecido"
+              title="Seleccione la opción de búsqueda"
+            />
+            <CardContent>
+              <Grid container>
+                <TextField
+                  fullWidth
+                  label="Buscar por"
+                  name="criterioDeBusqueda"
+                  onChange={handleChangeSearchOption}
+                  select
+                  SelectProps={{ native: true }}
+                >
+                  {opcionesBusquedaVinculacion.map((opcion) => (
+                    <option key={opcion.value} value={opcion.value}>
+                      {opcion.label}
+                    </option>
+                  ))}
+                </TextField>
+              </Grid>
+            </CardContent>
+          </Card>
+        </Stack>
+
+        <LinkSamplesInfo
+          documentoIdentidad={documentoIdentidadMuestradante}
+          nombres={nombreMuestradante}
         />
-        <CardContent>
-          <Grid container>
-            <TextField
-              fullWidth
-              label="Tipo de Documento"
-              name="tipoDocumento"
-              onChange={handleChangeSearchOption}
-              select
-              SelectProps={{ native: true }}
-            >
-              {opcionesBusqueda.map((opcion) => (
-                <option key={opcion.value} value={opcion.value}>
-                  {opcion.label}
-                </option>
-              ))}
-            </TextField>
-          </Grid>
-        </CardContent>
-      </Card>
-      {searchOption == "documentoDeIdentidad" ? (
-        <form autoComplete="off" onSubmit={handleSubmitDocument}>
+      </Stack>
+      {searchOption == "desaparecidoId" ? (
+        <form autoComplete="off" onSubmit={handleSubmitID}>
           <Card>
             <CardHeader
-              subheader="Por favor ingrese el documento de identidad"
-              title="Criterios de búsqueda del muestradante"
+              subheader="Por favor ingrese ID del desaparecido"
+              title="Criterios de búsqueda del desaparecido"
             />
 
             <CardContent className={styles.inputsContainer}>
               <OutlinedInput
                 fullWidth
-                placeholder="Documento de Identidad"
-                name="documentoDeIdentidad"
+                placeholder="ID del desaparecido"
+                name="desaparecidoId"
                 sx={{ maxWidth: 400, mr: 3 }}
                 required
               />
