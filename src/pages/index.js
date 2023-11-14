@@ -9,10 +9,20 @@ import { OverviewTasksProgress } from "src/sections/overview/overview-tasks-prog
 import { TotalResults } from "src/sections/overview/totalResults";
 import { OverviewTotalProfit } from "src/sections/overview/overview-total-profit";
 import { OverviewTraffic } from "src/sections/overview/overview-traffic";
+import { withAuthGuard } from "src/hocs/with-auth-guard";
+import { useAuth } from "src/hooks/use-auth";
 
 const now = new Date();
 
-const Page = () => (
+const Page = () => {
+   // Use the useAuthContext hook to get the authentication context
+  //  const authContext = useAuthContext();
+  //  const { isAuthenticated, user } = authContext;
+  //  console.log(user);
+
+  const auth = useAuth();
+  console.log(auth.user)
+  return(
   <>
     <Head>
       <title>Registro muestras y desaparecidos CTI | Home</title>
@@ -131,7 +141,8 @@ const Page = () => (
       </Container>
     </Box>
   </>
-);
+)
+};
 
 Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 

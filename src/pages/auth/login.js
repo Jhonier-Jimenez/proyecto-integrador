@@ -25,17 +25,19 @@ const Page = () => {
   const [method, setMethod] = useState("email");
   const formik = useFormik({
     initialValues: {
-      email: "victor.hidalgo@fiscalia.gov.co",
-      password: "Password123!",
-      submit: null,
+      emailAddress: "",
+      password: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string().email("Must be a valid email").max(255).required("Email is required"),
-      password: Yup.string().max(255).required("Password is required"),
+      emailAddress: Yup.string()
+        .email("Debe ser un correo válido")
+        .max(255)
+        .required("El correo es requerido"),
+      password: Yup.string().max(255).required("La contraseña es requerida"),
     }),
     onSubmit: async (values, helpers) => {
       try {
-        await auth.signIn(values.email, values.password);
+        await auth.signIn(values.emailAddress, values.password);
         router.push("/");
       } catch (err) {
         helpers.setStatus({ success: false });
@@ -48,11 +50,6 @@ const Page = () => {
   const handleMethodChange = useCallback((event, value) => {
     setMethod(value);
   }, []);
-
-  const handleSkip = useCallback(() => {
-    auth.skip();
-    router.push("/");
-  }, [auth, router]);
 
   return (
     <>
@@ -79,17 +76,6 @@ const Page = () => {
           <div>
             <Stack spacing={1} sx={{ mb: 3 }}>
               <Typography variant="h4">Iniciar sesión</Typography>
-              <Typography color="text.secondary" variant="body2">
-                ¿No tienes una cuenta? &nbsp;
-                <Link
-                  component={NextLink}
-                  href="/auth/register"
-                  underline="hover"
-                  variant="subtitle2"
-                >
-                  Crear cuenta
-                </Link>
-              </Typography>
             </Stack>
             <Tabs onChange={handleMethodChange} sx={{ mb: 3 }} value={method}>
               <Tab label="Email" value="email" />
@@ -98,15 +84,15 @@ const Page = () => {
               <form noValidate onSubmit={formik.handleSubmit}>
                 <Stack spacing={3}>
                   <TextField
-                    error={!!(formik.touched.email && formik.errors.email)}
+                    error={!!(formik.touched.emailAddress && formik.errors.emailAddress)}
                     fullWidth
-                    helperText={formik.touched.email && formik.errors.email}
+                    helperText={formik.touched.emailAddress && formik.errors.emailAddress}
                     label="Correo"
-                    name="email"
+                    name="emailAddress"
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     type="email"
-                    value={formik.values.email}
+                    value={formik.values.emailAddress}
                   />
                   <TextField
                     error={!!(formik.touched.password && formik.errors.password)}
@@ -129,9 +115,7 @@ const Page = () => {
                 <Button fullWidth size="large" sx={{ mt: 3 }} type="submit" variant="contained">
                   Continuar
                 </Button>
-                <Button fullWidth size="large" sx={{ mt: 3 }} onClick={handleSkip}>
-                  Botón temporal para ir a la página principal
-                </Button>
+
                 <Alert color="primary" severity="info" sx={{ mt: 3 }}>
                   <div>
                     Inserte aquí una <b>alerta</b> para informar algo al <b>usuario</b>

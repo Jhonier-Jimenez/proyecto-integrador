@@ -9,6 +9,8 @@ export const AccountPopover = (props) => {
   const router = useRouter();
   const auth = useAuth();
 
+  const {user} = auth
+
   const handleSignOut = useCallback(() => {
     onClose?.();
     auth.signOut();
@@ -34,7 +36,7 @@ export const AccountPopover = (props) => {
       >
         <Typography variant="overline">Cuenta</Typography>
         <Typography color="text.secondary" variant="body2">
-          Victor Hidalgo
+          {user?.username}
         </Typography>
       </Box>
       <Divider />

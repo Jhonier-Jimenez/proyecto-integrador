@@ -33,7 +33,6 @@ const handlers = {
   },
   [HANDLERS.SIGN_IN]: (state, action) => {
     const user = action.payload;
-
     return {
       ...state,
       isAuthenticated: true,
@@ -41,6 +40,7 @@ const handlers = {
     };
   },
   [HANDLERS.SIGN_OUT]: (state) => {
+    console.log("SIGNED OUT");
     return {
       ...state,
       isAuthenticated: false,
@@ -104,43 +104,22 @@ export const AuthProvider = (props) => {
     []
   );
 
-  const skip = () => {
-    try {
-      window.sessionStorage.setItem("authenticated", "true");
-    } catch (err) {
-      console.error(err);
-    }
-
-    const user = {
-      id: "5e86809283e28b96d2d38537",
-      avatar: "/assets/avatars/avatar-anika-visser.png",
-      name: "Victor Hidalgo",
-      email: "victor.hidalgo@fiscalia.gov.co",
-    };
-
-    dispatch({
-      type: HANDLERS.SIGN_IN,
-      payload: user,
-    });
-  };
-
   const signIn = async (email, password) => {
-    if (email !== "demo@devias.io" || password !== "Password123!") {
-      throw new Error("Please check your email and password");
+    const url = "http://localhost:80/api/Usuario/login";
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ emailAddress: email, password }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Correo o contraseña incorrecta");
     }
 
-    try {
-      window.sessionStorage.setItem("authenticated", "true");
-    } catch (err) {
-      console.error(err);
-    }
-
-    const user = {
-      id: "5e86809283e28b96d2d38537",
-      avatar: "/assets/avatars/avatar-anika-visser.png",
-      name: "Victor Hidalgo",
-      email: "victor.hidalgo@fiscalia.gov.co",
-    };
+    const user = await response.json();
 
     dispatch({
       type: HANDLERS.SIGN_IN,
@@ -148,8 +127,26 @@ export const AuthProvider = (props) => {
     });
   };
 
-  const signUp = async (email, name, password) => {
-    throw new Error("Sign up is not implemented");
+  const signUp = async (userName, password, emailAddress, role, surName, givenName) => {
+    const url = "http://localhost:80/api/Usuario/create";
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userName, password, emailAddress, role, surName, givenName }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Ocurrió un error al crear el nuevo usuario");
+    }
+
+    const newUser = await response.json();
+
+    return newUser;
+    
+    
   };
 
   const signOut = () => {
@@ -162,7 +159,6 @@ export const AuthProvider = (props) => {
     <AuthContext.Provider
       value={{
         ...state,
-        skip,
         signIn,
         signUp,
         signOut,

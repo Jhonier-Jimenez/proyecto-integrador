@@ -11,6 +11,8 @@ import {
   Unstable_Grid2 as Grid,
 } from "@mui/material";
 
+import { useAuth } from "src/hooks/use-auth";
+
 const states = [
   {
     value: "antioquia",
@@ -31,10 +33,13 @@ const states = [
 ];
 
 export const AccountProfileDetails = () => {
+  const auth = useAuth();
+  const {user} = auth
+
   const [values, setValues] = useState({
-    firstName: "Victor",
-    lastName: "Hidalgo",
-    email: "victor.hidalgo@fiscalia.gov.co",
+    firstName: user.username,
+    lastName: user.surname,
+    email: user.emailAddress,
     phone: "",
     state: "antioquia",
     country: "Medellín",
@@ -130,10 +135,11 @@ export const AccountProfileDetails = () => {
             </Grid>
           </Box>
         </CardContent>
-        <Divider />
+        {user.role == "Administrator" ? <><Divider />
         <CardActions sx={{ justifyContent: "flex-end" }}>
           <Button variant="contained">Guardar los cambios</Button>
-        </CardActions>
+        </CardActions></> : null}
+        
       </Card>
     </form>
   );

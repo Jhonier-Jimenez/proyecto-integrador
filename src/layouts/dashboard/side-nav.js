@@ -15,13 +15,17 @@ import {
 } from "@mui/material";
 import { Logo } from "src/components/logo";
 import { Scrollbar } from "src/components/scrollbar";
-import { mainItems, searchitems, newRegisterItems } from "./config";
+import { mainItems, searchitems, newRegisterItems, close } from "./config";
 import { SideNavItem } from "./side-nav-item";
+import { useAuth } from "src/hooks/use-auth";
 
 export const SideNav = (props) => {
   const { open, onClose } = props;
   const pathname = usePathname();
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"));
+  const auth = useAuth();
+
+  const {user} = auth
 
   const content = (
     <Scrollbar
@@ -139,7 +143,7 @@ export const SideNav = (props) => {
               );
             })}
           </Stack>
-          <Divider sx={{ borderColor: "neutral.700" }} />
+          {user?.role == "Administrator" ? <><Divider sx={{ borderColor: "neutral.700" }} />
           <Stack
             component="ul"
             spacing={0.5}
@@ -161,6 +165,34 @@ export const SideNav = (props) => {
                   key={item.title}
                   path={item.path}
                   title={item.title}
+                />
+              );
+            })}
+          </Stack></> : null}
+          
+          <Divider sx={{ borderColor: "neutral.700" }} />
+          <Stack
+            component="ul"
+            spacing={0.5}
+            sx={{
+              listStyle: "none",
+              p: 0,
+              mt: 2,
+            }}
+          >
+            {close.map((item) => {
+              const active = item.path ? pathname === item.path : false;
+
+              return (
+                <SideNavItem
+                  active={active}
+                  disabled={item.disabled}
+                  external={item.external}
+                  icon={item.icon}
+                  key={item.title}
+                  path={item.path}
+                  title={item.title}
+                  onClickFunction={() => auth.signOut()}
                 />
               );
             })}

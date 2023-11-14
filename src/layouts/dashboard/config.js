@@ -27,33 +27,9 @@ export const mainItems = [
       </SvgIcon>
     ),
   },
-  {
-    title: "Conectarse",
-    path: "/auth/login",
-    icon: (
-      <SvgIcon fontSize="small">
-        <LockClosedIcon />
-      </SvgIcon>
-    ),
-  },
-  {
-    title: "Crear Cuenta",
-    path: "/auth/register",
-    icon: (
-      <SvgIcon fontSize="small">
-        <UserPlusIcon />
-      </SvgIcon>
-    ),
-  },
-  {
-    title: "Error",
-    path: "/404",
-    icon: (
-      <SvgIcon fontSize="small">
-        <XCircleIcon />
-      </SvgIcon>
-    ),
-  },
+  
+  
+
 ];
 
 export const searchitems = [
@@ -80,11 +56,20 @@ export const searchitems = [
 
 export const newRegisterItems = [
   {
+    title: "Crear Cuenta",
+    path: "/auth/register",
+    icon: (
+      <SvgIcon fontSize="small">
+        <UserPlusIcon />
+      </SvgIcon>
+    ),
+  },
+  {
     title: "Agregar desaparecido",
     path: "/nuevo-registro/desaparecido/agregar-desaparecido",
     icon: (
       <SvgIcon fontSize="small">
-        <UsersIcon />
+        <UserPlusIcon />
       </SvgIcon>
     ),
   },
@@ -93,8 +78,20 @@ export const newRegisterItems = [
     path: "/nuevo-registro/muestradante/agregar-muestradante",
     icon: (
       <SvgIcon fontSize="small">
-        <UsersIcon />
+        <UserPlusIcon />
       </SvgIcon>
     ),
   },
 ];
+
+export const close = [
+  {
+    title: "Cerrar sesión",
+    path: "/auth/login",
+    icon: (
+      <SvgIcon fontSize="small">
+        <XCircleIcon />
+      </SvgIcon>
+    ),
+  },
+]

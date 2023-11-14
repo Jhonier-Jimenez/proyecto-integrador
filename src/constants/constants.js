@@ -230,3 +230,15 @@ export const consentimientoPoblacional = [
     label: "No",
   },
 ];
+
+export const roles = [
+  {
+    value:"Guest",
+    label: "Visitante"
+  },
+  {
+    value:"Administrator",
+    label: "Administrador"
+  }
+  
+]
