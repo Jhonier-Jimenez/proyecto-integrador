@@ -17,10 +17,12 @@ import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
 import { DonorsForm } from "src/sections/donors-form/donors-form";
 import { DonorsFormInfo } from "src/sections/donors-form/donors-form-info";
 import { useState } from "react";
+import { useAuth } from "src/hooks/use-auth";
 
 const Page = () => {
   const [sendData, setSendData] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const {user} = useAuth();
 
   const handleSend = async (values) => {
     const url = "http://localhost:80/api/Muestradante";
@@ -29,6 +31,7 @@ const Page = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${user.token}`
       },
       body: JSON.stringify(values),
     });

@@ -37,9 +37,9 @@ export const AccountProfileDetails = () => {
   const {user} = auth
 
   const [values, setValues] = useState({
-    firstName: user.username,
-    lastName: user.surname,
-    email: user.emailAddress,
+    firstName: user?.username,
+    lastName: user?.surname,
+    email: user?.emailAddress,
     phone: "",
     state: "antioquia",
     country: "Medellín",
@@ -135,7 +135,7 @@ export const AccountProfileDetails = () => {
             </Grid>
           </Box>
         </CardContent>
-        {user.role == "Administrator" ? <><Divider />
+        {user?.role == "Administrator" ? <><Divider />
         <CardActions sx={{ justifyContent: "flex-end" }}>
           <Button variant="contained">Guardar los cambios</Button>
         </CardActions></> : null}

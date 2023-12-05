@@ -54,7 +54,6 @@ export const MissingsTable = (props) => {
                   />
                 </TableCell>
                 <TableCell>#</TableCell>
-                <TableCell>ID</TableCell>
                 <TableCell>Tipo Documento</TableCell>
                 <TableCell>Número Documento</TableCell>
                 <TableCell>Nombres</TableCell>
@@ -86,11 +85,7 @@ export const MissingsTable = (props) => {
                       />
                     </TableCell>
                     <TableCell>{index}</TableCell>
-                    <TableCell>
-                      <Stack alignItems="center" direction="row" spacing={2}>
-                        <Typography variant="subtitle2">{resultado.id}</Typography>
-                      </Stack>
-                    </TableCell>
+
                     <TableCell>{resultado.tipoDocumento}</TableCell>
                     <TableCell>{resultado.documentoIdentidad}</TableCell>
                     <TableCell>{resultado.nombre}</TableCell>

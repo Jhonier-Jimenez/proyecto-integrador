@@ -16,10 +16,12 @@ import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
 import { MissingsForm } from "src/sections/missings-form/missings-form";
 import { MissingsFormInfo } from "src/sections/missings-form/missings-form-info";
 import { useState } from "react";
+import { useAuth } from "src/hooks/use-auth";
 
 const Page = () => {
   const [sendData, setSendData] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const {user} = useAuth();
 
   const handleSend = async (sendData) => {
     const url = "http://localhost:80/api/Desaparecido";
@@ -28,6 +30,7 @@ const Page = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${user.token}`
       },
       body: JSON.stringify(sendData),
     });

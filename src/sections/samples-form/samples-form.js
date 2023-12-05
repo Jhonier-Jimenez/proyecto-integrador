@@ -23,7 +23,7 @@ import { DatePicker } from "@mui/x-date-pickers";
 export const SamplesForm = ({ onSend, documentoIdentidadMuestradante }) => {
   const [values, setValues] = useState({
     radicadoInterno: "",
-    tipoMuestra: "sangre",
+    tipoMuestra: "SSANGRE_FTA",
     estadoMuestra: "valida",
     fechaTomaMuestra: "",
     consentimientoPoblacional: "true",

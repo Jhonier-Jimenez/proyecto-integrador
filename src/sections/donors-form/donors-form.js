@@ -11,8 +11,8 @@ import {
   Unstable_Grid2 as Grid,
 } from "@mui/material";
 import { format } from "date-fns";
-
-import { tiposDocumento, generos, departamentos } from "src/constants/constants";
+import { parentescos } from "src/constants/constants";
+import { tiposDocumento, departamentos } from "src/constants/constants";
 import { DatePicker } from "@mui/x-date-pickers";
 
 export const DonorsForm = ({ onSend }) => {
@@ -20,10 +20,9 @@ export const DonorsForm = ({ onSend }) => {
     nombre: "",
     primerApellido: "",
     segundoApellido: "",
-    tipoDocumento: "cedulaDeCiudadania",
+    tipoDocumento: "CC",
     documentoIdentidad: "",
-    // genero: "masculino",
-    parentesco: "",
+    parentesco: "M",
     fechaNacimiento: "",
     departamento: "amazonas",
     municipio: "",
@@ -114,31 +113,22 @@ export const DonorsForm = ({ onSend }) => {
                   onChange={handleChange}
                 />
               </Grid>
-              {/* <Grid xs={12} md={6}>
+              <Grid xs={12} md={6}>
                 <TextField
                   fullWidth
-                  label="Género"
-                  name="genero"
+                  label="Parentesco"
+                  name="parentesco"
                   onChange={handleChange}
                   required
                   select
                   SelectProps={{ native: true }}
                 >
-                  {generos.map((genero) => (
-                    <option key={genero.value} value={genero.value}>
-                      {genero.label}
+                  {parentescos.map((parentesco) => (
+                    <option key={parentesco.value} value={parentesco.value}>
+                      {parentesco.label}
                     </option>
                   ))}
                 </TextField>
-              </Grid> */}
-              <Grid xs={12} md={6}>
-                <TextField
-                  required
-                  fullWidth
-                  label="Parentesco"
-                  name="parentesco"
-                  onChange={handleChange}
-                />
               </Grid>
               <Grid xs={12} md={6}>
                 <DatePicker

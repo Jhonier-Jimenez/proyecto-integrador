@@ -1,43 +1,15 @@
 export const tiposDocumento = [
   {
-    value: "cedulaDeCiudadania",
-    label: "Cédula de ciudadanía",
+    value: "CC",
+    label: "CC",
   },
   {
-    value: "tarjetaDeIdentidad",
-    label: "Tarjeta de identidad",
+    value: "CO",
+    label: "CO",
   },
   {
-    value: "cedulaDeExtranjeria",
-    label: "Cédula de extranjería",
-  },
-  {
-    value: "pasaporte",
-    label: "Pasaporte",
-  },
-  {
-    value: "registroCivil",
-    label: "Registro civil",
-  },
-  {
-    value: "tarjetaProfesional",
-    label: "Tarjeta profesional",
-  },
-  {
-    value: "permisoEspecialDePermanencia",
-    label: "Permiso especial de permanencia",
-  },
-  {
-    value: "salvoconducto",
-    label: "Salvoconducto",
-  },
-  {
-    value: "visa",
-    label: "Visa",
-  },
-  {
-    value: "otro",
-    label: "Otro",
+    value: "TI",
+    label: "TI",
   },
 ];
 
@@ -196,17 +168,26 @@ export const opcionesBusqueda = [
 
 export const tiposDeMuestra = [
   {
-    value: "sangre",
-    label: "Sangre",
+    value: "SSANGRE_FTA",
+    label: "SSANGRE_FTA",
   },
   {
-    value: "saliva",
-    label: "Saliva",
+    value: "SANGRE_LIQUIDA",
+    label: "SANGRE_LIQUIDA",
   },
   {
-    value: "cabello",
-    label: "Cabello",
+    value: "SANGRE_SOPORTE",
+    label: "SANGRE_SOPORTE",
   },
+  {
+    value: "MUCOSA_BUCAL",
+    label: "MUCOSA_BUCAL",
+  },
+  {
+    value: "MUCOSA_BUCAL_FTA",
+    label: "MUCOSA_BUCAL_FTA",
+  },
+  
 ];
 
 export const estadosDeMuestra = [
@@ -241,4 +222,59 @@ export const roles = [
     label: "Administrador"
   }
   
+]
+
+export const parentescos = [
+  {
+    value: "M",
+    label: "M",
+  },
+  {
+    value: "P",
+    label: "P",
+  },
+  {
+    value: "H",
+    label: "H",
+  },
+  {
+    value: "FMP",
+    label: "FMP",
+  },
+  {
+    value: "FM",
+    label: "FM",
+  },
+  {
+    value: "FP",
+    label: "FP",
+  },
+  {
+    value: "FSM",
+    label: "FSM",
+  },
+  {
+    value: "FSP",
+    label: "FSP",
+  },
+  {
+    value: "FTP",
+    label: "FTP",
+  },
+  {
+    value: "FTM",
+    label: "FTM",
+  },
+  {
+    value: "C",
+    label: "C",
+  },
+  {
+    value: "FAM",
+    label: "FAM",
+  },
+  {
+    value: "FAP",
+    label: "FAP",
+  }
 ]

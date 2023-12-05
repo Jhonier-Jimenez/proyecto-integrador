@@ -18,7 +18,7 @@ export const MissingsForm = ({ onSend }) => {
     nombre: "",
     primerApellido: "",
     segundoApellido: "",
-    tipoDocumento: "cedulaDeCiudadania",
+    tipoDocumento: "CC",
     documentoIdentidad: "",
     genero: "masculino",
     sirdec: "",
